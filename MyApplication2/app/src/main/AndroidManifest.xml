@@ -2,6 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.think.myapplication">
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- 自定义权限 -->
+
+
+    <!-- 读联系人权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- 写联系人权限 -->
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <!-- 拨号权限 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!-- 读短信权限 -->
+    <uses-permission android:name="android.permission.READ_SMS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -25,7 +41,34 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".FriendsActivity"
+            android:label="@string/title_activity_friends"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="com.example.think.myapplication.FriendsActivity" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!--
+             ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".FindActivity"
+            android:label="@string/title_activity_find"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="com.example.think.myapplication.FindActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
