@@ -5,8 +5,11 @@ import android.app.FragmentTransaction;
 import android.hardware.fingerprint.FingerprintManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import java.security.PrivateKey;
 
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         //获取第一个单选按钮，并设置其为选中状态
         rb_channel = (RadioButton) findViewById(R.id.rb_channel);
         rb_channel.setChecked(true);
+
+
     }
 
     @Override
@@ -77,4 +82,6 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         if(fg3 != null)fragmentTransaction.hide(fg3);
         if(fg4 != null)fragmentTransaction.hide(fg4);
     }
+
+
 }
