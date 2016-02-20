@@ -1,6 +1,9 @@
 package cn.datapad.lifenote.one.lifenote;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -13,10 +16,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private StringBuilder mydbcontent;
+    private SQLiteDatabase mydb;
+    private DbOpenHelper myDBHelper;
+    private Context mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +49,25 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mContext = MainActivity.this;
+        myDBHelper = new DbOpenHelper(mContext,"note.db",null,1);
+
+        TextView note_main_content = (TextView) findViewById(R.id.content_main_textView_1);
+
+        mydb = myDBHelper.getWritableDatabase();
+        mydbcontent = new StringBuilder();
+
+        Cursor cursor = mydb.query("note", null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                int noteid = cursor.getInt(cursor.getColumnIndex("noteid"));
+                String title = cursor.getString(cursor.getColumnIndex("title"));
+                mydbcontent.append("id：" + noteid + "：" + title + "\n");
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        note_main_content.setText(mydbcontent);
     }
 
     @Override
@@ -75,21 +102,33 @@ public class MainActivity extends AppCompatActivity
         switch (id) {
             case R.id.action_settings:
                 // app icon in action bar clicked; go home
-                Intent intent = new Intent(this, MainActivity.class);
+                Intent intent = new Intent(this, NoteAddActivity.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 return true;
             case R.id.action_addnote:
                 // app icon in action bar clicked; go home
-                Intent intent2 = new Intent(this, MainActivity.class);
+                Intent intent_NoteAddActivity = new Intent(this, NoteAddActivity.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent2);
+                startActivity(intent_NoteAddActivity);
                 return true;
             case R.id.action_findnote:
                 // app icon in action bar clicked; go home
-                Intent intent3 = new Intent(this, MainActivity.class);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent3);
+                TextView note_main_content = (TextView) findViewById(R.id.content_main_textView_1);
+
+                mydb = myDBHelper.getWritableDatabase();
+                mydbcontent = new StringBuilder();
+
+                Cursor cursor = mydb.query("note", null, null, null, null, null, null);
+                if (cursor.moveToFirst()) {
+                    do {
+                        int noteid = cursor.getInt(cursor.getColumnIndex("noteid"));
+                        String title = cursor.getString(cursor.getColumnIndex("title"));
+                        mydbcontent.append("id：" + noteid + "：" + title + "\n");
+                    } while (cursor.moveToNext());
+                }
+                cursor.close();
+                note_main_content.setText(mydbcontent);
                 return true;
 
             default:
