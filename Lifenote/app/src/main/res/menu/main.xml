@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    //orderInCategory越大越往后布局
+    <item android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_addnote"
+        android:title="@string/action_addnote"
+        android:orderInCategory="200"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_findnote"
+        android:title="@string/action_findnote"
+        android:orderInCategory="300"
+        app:showAsAction="never" />
+</menu>
