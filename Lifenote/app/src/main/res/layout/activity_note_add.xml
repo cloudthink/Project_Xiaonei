@@ -16,7 +16,8 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:id="@+id/linearLayout">
 
         <EditText
             android:layout_width="match_parent"
@@ -24,30 +25,81 @@
             android:inputType="textMultiLine"
             android:ems="10"
             android:hint="标题"
-            android:id="@+id/editText1"
+            android:id="@+id/editText_title"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.15" />
+            android:layout_weight="0.05" />
 
-        <DatePicker
-            android:layout_width="wrap_content"
-            android:layout_height="119dp"
-            android:id="@+id/datePicker"
-            android:layout_gravity="center_horizontal" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="72dp">
 
-        <Switch
-            android:layout_width="349dp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="分类"
+                android:id="@+id/textView_fenlei"
+                android:layout_weight="0.01"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="25dp" />
+
+            <Spinner
+                android:layout_width="120dp"
+                android:layout_height="90dp"
+                android:id="@+id/spinner_fenlei"
+                android:layout_gravity="right"
+                android:layout_weight="0.01" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="提醒"
-            android:id="@+id/switch1"
-            android:layout_gravity="right"
-            android:layout_weight="0.15" />
+            android:layout_margin="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="日期"
+                android:id="@+id/textView_riqi"
+                android:layout_weight="0.01" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="51dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="2015/2/22"
+                android:id="@+id/textView_date"
+                android:layout_gravity="right"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="0.01" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.05">
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="  提醒"
+                android:id="@+id/switch_tixing" />
+        </LinearLayout>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="确定"
             android:id="@+id/button_submit"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.05" />
 
     </LinearLayout>
+
 </RelativeLayout>
