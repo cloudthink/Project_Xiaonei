@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,7 +18,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -55,8 +53,13 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                Intent intent_NoteAddActivity = new Intent(MainActivity.this, NoteAddActivity.class);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                startActivity(intent_NoteAddActivity);
+                //结束此活动避免异常返回
+                MainActivity.this.finish();
             }
         });
 
@@ -68,6 +71,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
         showDbUpdata();
 
     }
@@ -75,7 +79,7 @@ public class MainActivity extends AppCompatActivity
         mContext = MainActivity.this;
         myDBHelper = new DbOpenHelper(mContext, "note.db", null, 1);
 
-        TextView note_main_content = (TextView) findViewById(R.id.content_main_textView_1);
+        //TextView note_main_content = (TextView) findViewById(R.id.content_main_textView_1);
 
         mydb = myDBHelper.getWritableDatabase();
         mydbcontent = new StringBuilder();
@@ -172,12 +176,6 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         //右上角actionbar
         switch (id) {
-            case R.id.action_settings:
-                // app icon in action bar clicked; go home
-                Intent intent = new Intent(this, NoteAddActivity.class);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                return true;
             case R.id.action_addnote:
                 // app icon in action bar clicked; go home
                 Intent intent_NoteAddActivity = new Intent(this, NoteAddActivity.class);
@@ -186,24 +184,6 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent_NoteAddActivity);
                 //结束此活动避免异常返回
                 MainActivity.this.finish();
-                return true;
-            case R.id.action_findnote:
-                // app icon in action bar clicked; go home
-                TextView note_main_content = (TextView) findViewById(R.id.content_main_textView_1);
-
-                mydb = myDBHelper.getWritableDatabase();
-                mydbcontent = new StringBuilder();
-
-                Cursor cursor = mydb.query("note", null, null, null, null, null, null);
-                if (cursor.moveToFirst()) {
-                    do {
-                        int noteid = cursor.getInt(cursor.getColumnIndex("noteid"));
-                        String title = cursor.getString(cursor.getColumnIndex("title"));
-                        mydbcontent.append("id：" + noteid + "：" + title + "\n");
-                    } while (cursor.moveToNext());
-                }
-                cursor.close();
-                note_main_content.setText(mydbcontent);
                 return true;
 
             default:
@@ -219,13 +199,9 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_note) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_setting) {
 
         } else if (id == R.id.nav_share) {
 

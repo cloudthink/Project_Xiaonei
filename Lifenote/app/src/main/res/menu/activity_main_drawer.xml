@@ -3,9 +3,19 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_note"
+            android:icon="@mipmap/iconfont_time"
+            android:title="时间轴" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="每日清单" />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@mipmap/iconfont_settings"
+            android:title="设置" />
+
+        <!--
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
@@ -14,10 +24,7 @@
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="设置" />
+        -->
     </group>
 
     <item android:title="Communicate">
@@ -28,7 +35,7 @@
                 android:title="分享" />
             <item
                 android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@mipmap/iconfont_info"
                 android:title="关于我们" />
         </menu>
     </item>

@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,18 +15,20 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class NoteAddActivity extends AppCompatActivity implements View.OnClickListener{
+public class NoteReditActivity  extends AppCompatActivity implements View.OnClickListener{
+
     private Context mContext;
     private SQLiteDatabase mydb;
     private DbOpenHelper myDBHelper;
@@ -46,19 +49,73 @@ public class NoteAddActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_note_add);
+        setContentView(R.layout.activity_note_redit);
+/*
+        Intent intent_redit = getIntent();
+        //从Intent当中根据key取得value
+        int note_id = intent_redit.getExtras().getInt("Intent_note_id_redit");
+        Toast.makeText(mContext, "成功"+note_id, Toast.LENGTH_SHORT).show();
+       */
         //初始化数据库
-        mContext = NoteAddActivity.this;
+        int note_id = 1;
+        mContext = NoteReditActivity.this;
         myDBHelper = new DbOpenHelper(mContext, "note.db",null,1);//初次打开程序创建数据库，调用自定义类继承DbOpenHelper.java类
 
+        searchiDb(note_id);//显示要编辑的数据
         bindViews();//绑定UI
-        showFenleiList();//显示分类列表选择
-        showDate();//显示时间选择
+        //showFenleiList();//显示分类列表选择
+        //showDate();//显示时间选择
 
     }
+    private void searchiDb(int note_id){
+        note_id = note_id - 1;
+        String note_id_string = String.valueOf(note_id);
+        //note_id_string = String.format();
+        //Toast.makeText(note_id, Toast.LENGTH_SHORT).show();
 
+        //参数依次是:表名，列名，where约束条件，where中占位符提供具体的值，指定group by的列，进一步约束
+        // Cursor cursor = mydb.query("note", new String[]{"noteid"}, "noteid like ?", new String[]{note_id}, null, null, null);
+        Cursor cursor = mydb.rawQuery("SELECT * FROM note WHERE noteid = ?", new String[]{note_id_string});
+        //存在数据才返回true
+        int noteid = 1;
+        String title = null;
+        String date = null;
+        String fenlei = null;
+        int tianshu = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date_start = new Date(System.currentTimeMillis());//获取当前时间
+        Date date_end = null;
+        if (cursor.moveToFirst()) {
+            do {
+                noteid = cursor.getInt(cursor.getColumnIndex("noteid"));
+                title = cursor.getString(cursor.getColumnIndex("title"));
+                fenlei = cursor.getString(cursor.getColumnIndex("fenlei"));
+                date = cursor.getString(cursor.getColumnIndex("date"));
+                try {
+                    date_end = sdf.parse(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        String cha = Integer.toString(tianshu);//将int转化为stirng
+
+        //int fenlei_id = Arrays.asList(leibie_list).indexOf(fenlei);//获取图标分类索引
+        list.add(fenlei);
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);
+
+        EditText note_title_redit = (EditText) findViewById(R.id.editText_title_redit);
+        Spinner note_fenlei_redit = (Spinner) findViewById(R.id.spinner_fenlei_redit);
+        TextView note_date_redit = (TextView) findViewById(R.id.textView_date_redit);
+
+        note_title_redit.setText(title);
+        note_fenlei_redit.setAdapter(adapter);
+        note_date_redit.setText(date);
+    }
     private void showDate(){
-        showdate=(TextView) this.findViewById(R.id.textView_date);
+        showdate=(TextView) this.findViewById(R.id.textView_date_redit);
 
         //初始化Calendar日历对象
         Calendar mycalendar=Calendar.getInstance(Locale.CHINA);
@@ -86,7 +143,7 @@ public class NoteAddActivity extends AppCompatActivity implements View.OnClickLi
                  *
                  */
                 //创建DatePickerDialog对象
-                DatePickerDialog dpd=new DatePickerDialog(NoteAddActivity.this,Datelistener,year,month,day);
+                DatePickerDialog dpd=new DatePickerDialog(NoteReditActivity.this,Datelistener,year,month,day);
                 dpd.show();//显示DatePickerDialog组件
             }
         });
@@ -170,35 +227,23 @@ public class NoteAddActivity extends AppCompatActivity implements View.OnClickLi
     };
 
     private void bindViews(){
-        button_submit = (Button) findViewById(R.id.button_submit);
+        button_submit = (Button) findViewById(R.id.button_submit_redit);
 
         button_submit.setOnClickListener(this);
-        ImageView image_back = (ImageView) findViewById(R.id.imageView_back);
-        image_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-
-                Intent intent = new Intent(NoteAddActivity.this, MainActivity.class);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                NoteAddActivity.this.finish();
-            }
-        });
     }
 
     @Override
     public void onClick(View v){
         mydb = myDBHelper.getWritableDatabase();
         switch (v.getId()){
-            case R.id.button_submit:
+            case R.id.button_submit_redit:
                 ContentValues myaddcontent = new ContentValues();
 
-                EditText title = (EditText) findViewById(R.id.editText_title);
+                EditText title = (EditText) findViewById(R.id.editText_title_redit);
                 String title_str = title.getText().toString();
-               // Spinner fenlei = (Spinner) findViewById(R.id.spinner_fenlei);
+                // Spinner fenlei = (Spinner) findViewById(R.id.spinner_fenlei);
                 String fenlei_str =  myitem; //fenlei.get.toString();
-                TextView date = (TextView) findViewById(R.id.textView_date);
+                TextView date = (TextView) findViewById(R.id.textView_date_redit);
                 String date_str = date.getText().toString();
                 //获取自定义内容
                 myaddcontent.put("title",title_str);
@@ -206,13 +251,13 @@ public class NoteAddActivity extends AppCompatActivity implements View.OnClickLi
                 myaddcontent.put("date",date_str);
                 //插入数据库
                 mydb.insert("note", null, myaddcontent);
-                Toast.makeText(mContext,"添加成功！",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "添加成功！", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(this, MainActivity.class);
+                Intent intent = new Intent(this, NoteDetailActivity.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
 
-                NoteAddActivity.this.finish();
+                //NoteReditActivity.this.finish();
                 break;
         }
     }

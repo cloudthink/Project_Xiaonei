@@ -10,8 +10,8 @@
         android:title="@string/action_addnote"
         android:orderInCategory="200"
         app:showAsAction="never" />
-    <item android:id="@+id/action_findnote"
-        android:title="@string/action_findnote"
+    <item android:id="@+id/action_fankui"
+        android:title="@string/action_fankui"
         android:orderInCategory="300"
         app:showAsAction="never" />
 </menu>

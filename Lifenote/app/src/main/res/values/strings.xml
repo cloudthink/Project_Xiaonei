@@ -4,9 +4,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">设置</string>
     <string name="action_addnote">添加</string>
-    <string name="action_findnote">findnote</string>
     <string name="title_activity_addnote">添加</string>
 
     <!-- Strings related to Settings -->
@@ -79,5 +78,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="app_motto">铭记瞬间，美好永存！</string>
+    <string name="action_fankui">反馈</string>
 
 </resources>

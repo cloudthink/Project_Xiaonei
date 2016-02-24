@@ -7,8 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="cn.datapad.lifenote.one.lifenote.NoteAddActivity"
-    android:background="#ecf0f1">
+    android:background="#ecf0f1"
+    tools:context="cn.datapad.lifenote.one.lifenote.NoteReditActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -48,7 +48,7 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:text="确定"
-            android:id="@+id/button_submit"
+            android:id="@+id/button_submit_redit"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.01"
             android:background="#32bd4e"
@@ -74,12 +74,11 @@
             android:inputType="textMultiLine"
             android:ems="10"
             android:hint="标题"
-            android:id="@+id/editText_title"
+            android:id="@+id/editText_title_redit"
             android:layout_weight="0.01"
             android:background="#ffffff"
             android:padding="13dp"
-            android:layout_marginBottom="3dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="3dp"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp" />
 
@@ -96,14 +95,14 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="分类"
-                android:id="@+id/textView_fenlei"
+                android:id="@+id/textView_fenlei_redit"
                 android:layout_marginLeft="10dp"
                 android:layout_gravity="center_vertical" />
 
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner_fenlei"
+                android:id="@+id/spinner_fenlei_redit"
                 android:layout_gravity="center_vertical" />
 
         </LinearLayout>
@@ -113,14 +112,18 @@
             android:layout_width="361dp"
             android:layout_height="60dp"
             android:background="#ffffff"
-            android:layout_margin="3dp">
+            android:layout_margin="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginBottom="0dp">
 
             <TextView
                 android:layout_width="76dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="日期"
-                android:id="@+id/textView_riqi"
+                android:id="@+id/textView_riqi_redit"
                 android:layout_weight="0.00"
                 android:layout_marginLeft="10dp"
                 android:layout_gravity="center_vertical" />
@@ -130,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="2015/2/22"
-                android:id="@+id/textView_date"
+                android:id="@+id/textView_date_redit"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="0.01" />
@@ -148,7 +151,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="  提醒"
-                android:id="@+id/switch_tixing"
+                android:id="@+id/switch_tixing_redit"
                 android:layout_weight="0.05"
                 android:background="#ffffff"
                 android:checked="false"

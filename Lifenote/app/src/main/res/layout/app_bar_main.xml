@@ -17,9 +17,32 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="#2ecc71"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
+<!--
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/toolbar"
+            android:background="#ffffff">
 
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:id="@+id/imageView_back"
+                android:layout_gravity="left"
+                android:src="@mipmap/iconfont_left"
+                android:layout_margin="5dp" />
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:id="@+id/imageView_delete"
+                android:src="@mipmap/iconfont_delete"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="5dp" />
+        </RelativeLayout>-->
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_main"/>
@@ -29,7 +52,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
+        app:backgroundTint="#2ECC71"
+        app:rippleColor="#33728dff"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
+        android:src="@mipmap/ic_add_white_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>

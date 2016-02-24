@@ -1,6 +1,8 @@
 package cn.datapad.lifenote.one.lifenote;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -90,9 +93,11 @@ public class NoteDetailActivity extends AppCompatActivity {
         note_detail_title.setVisibility(View.VISIBLE);
         note_detail_fenlei.setVisibility(View.VISIBLE);
         note_detail_icon.setVisibility(View.VISIBLE);
-
+        //编辑，分享，返回点击监听
         ImageView image_share = (ImageView) findViewById(R.id.imageView_share);
-
+        ImageView image_redit = (ImageView) findViewById(R.id.imageView_redit);
+        ImageView image_back = (ImageView) findViewById(R.id.imageView_back);
+        ImageView image_delete = (ImageView) findViewById(R.id.imageView_delete);
         image_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,8 +105,39 @@ public class NoteDetailActivity extends AppCompatActivity {
                 myShare();
             }
         });
+        final int finalNoteid = noteid;
+        image_redit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                myRedit(finalNoteid);
+            }
+        });
+        image_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                NoteDetailActivity.this.finish();
+            }
+        });
+        image_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                mydialog(finalNoteid);
+            }
+        });
     }
-
+    public void mydialog(final int finalNoteid){
+        new AlertDialog.Builder(NoteDetailActivity.this).setTitle("确认删除？?")
+                .setMessage("删除后无法恢复").setNegativeButton("取消", null)
+                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mydelete(finalNoteid);
+                    }
+                }).show();
+    }
     public static int getGapCount(Date startDate, Date endDate) {
         Calendar fromCalendar = Calendar.getInstance();
         fromCalendar.setTime(startDate);
@@ -119,6 +155,21 @@ public class NoteDetailActivity extends AppCompatActivity {
 
         return (int) ((toCalendar.getTime().getTime() - fromCalendar.getTime().getTime()) / (1000 * 60 * 60 * 24));
     }
+    public void mydelete(int finalNoteid){
+        mydb = myDBHelper.getWritableDatabase();
+        mydbcontent = new StringBuilder();
+        String note_id_string = String.valueOf(finalNoteid);//int转String
+
+        mydb.delete("note","noteid = ?",new String[]{note_id_string});
+
+        Toast.makeText(mContext, "删除成功！", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(NoteDetailActivity.this, MainActivity.class);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+
+        NoteDetailActivity.this.finish();
+    }
     public void myShare(){
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
@@ -127,5 +178,14 @@ public class NoteDetailActivity extends AppCompatActivity {
 
         //设置分享列表的标题，并且每次都显示分享列表
         startActivity(Intent.createChooser(shareIntent, "分享到"));
+    }
+    public void myRedit(int finalNoteid){
+        Intent reditIntent = new Intent();
+        reditIntent.putExtra("Intent_note_id_redit", finalNoteid);
+        //Toast.makeText(mContext, "添加成功"+finalNoteid, Toast.LENGTH_SHORT).show();
+        reditIntent.setClass(this, NoteReditActivity.class);
+        //通过Intent对象启动另外一个Activity
+        NoteDetailActivity.this.startActivity(reditIntent);
+
     }
 }
