@@ -6,6 +6,7 @@
             android:id="@+id/nav_note"
             android:icon="@mipmap/iconfont_time"
             android:title="时间轴" />
+        <!--
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
@@ -14,7 +15,7 @@
             android:id="@+id/nav_setting"
             android:icon="@mipmap/iconfont_settings"
             android:title="设置" />
-
+-->
         <!--
         <item
             android:id="@+id/nav_gallery"
@@ -34,7 +35,7 @@
                 android:icon="@drawable/ic_menu_share"
                 android:title="分享" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_aboutus"
                 android:icon="@mipmap/iconfont_info"
                 android:title="关于我们" />
         </menu>

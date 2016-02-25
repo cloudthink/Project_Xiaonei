@@ -10,26 +10,33 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:orientation="vertical"
     android:gravity="bottom"
-    android:transitionGroup="false">
+    android:transitionGroup="false"
+    android:weightSum="1">
 
     <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:src="@mipmap/ic_launcher"
+        android:id="@+id/imageView"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@android:drawable/sym_def_app_icon"
-        android:id="@+id/imageView" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="@string/app_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="30dp"
+        android:layout_gravity="center_horizontal" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_motto"
-        android:id="@+id/textView" />
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal"
+        android:textSize="16dp"
+        android:paddingBottom="10dp" />
 
 </LinearLayout>

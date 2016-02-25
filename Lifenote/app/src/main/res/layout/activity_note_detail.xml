@@ -23,7 +23,7 @@
                 android:layout_height="35dp"
                 android:id="@+id/imageView_back"
                 android:layout_gravity="left"
-                android:src="@mipmap/iconfont_left"
+                android:src="@mipmap/ic_arrow_back"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_alignTop="@+id/imageView_delete"
@@ -33,7 +33,6 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:id="@+id/imageView_delete"
-                android:src="@mipmap/iconfont_delete"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_margin="5dp" />
@@ -81,18 +80,9 @@
                 android:id="@+id/textView_note_detail_number"
                 android:layout_below="@+id/textView_note_detail_title"
                 android:layout_centerHorizontal="true"
-                android:textSize="90dp"
+                android:textSize="120dp"
                 android:textIsSelectable="true"
                 android:layout_gravity="center_horizontal" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:id="@+id/imageView_icon"
-                android:layout_above="@+id/textView_note_detail_title"
-                android:layout_alignParentEnd="true"
-                android:src="@mipmap/iconfont_heart"
-                android:layout_weight="0.16" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -103,7 +93,8 @@
                 android:id="@+id/textView_note_detail_fenlei"
                 android:layout_below="@+id/textView_note_detail_number"
                 android:layout_alignStart="@+id/textView_note_detail_title"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -113,7 +104,7 @@
                 android:id="@+id/textView_note_detail_title"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:textSize="23dp"
+                android:textSize="30dp"
                 android:layout_gravity="center_horizontal" />
 
         </LinearLayout>
@@ -124,7 +115,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:id="@+id/imageView_share"
-        android:src="@mipmap/iconfont_share"
+        android:src="@mipmap/ic_social_share"
         android:layout_alignTop="@+id/imageView_redit"
         android:layout_alignParentEnd="true"
         android:layout_margin="5dp" />
@@ -133,7 +124,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:id="@+id/imageView_redit"
-        android:src="@mipmap/iconfont_feedback"
+        android:src="@mipmap/ic_create_write"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_margin="5dp" />

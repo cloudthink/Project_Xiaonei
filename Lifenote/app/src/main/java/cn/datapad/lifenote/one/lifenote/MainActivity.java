@@ -1,5 +1,6 @@
 package cn.datapad.lifenote.one.lifenote;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -116,9 +118,27 @@ public class MainActivity extends AppCompatActivity
                 showitem.put("date", date);
                 showitem.put("number", cha);
                 listitem.add(showitem);
+
+                if(tianshu == 0){
+                    TextView note_detail_number = (TextView) findViewById(R.id.textView_main_number);
+                    TextView note_detail_title = (TextView) findViewById(R.id.textView_main_title);
+                    //TextView note_detail_fenlei = (TextView) findViewById(R.id.textView__fenlei);
+                    //ImageView note_detail_icon = (ImageView) findViewById(R.id.imageView_main_icon);
+
+                    note_detail_number.setText(cha);
+                    note_detail_title.setText(title);
+                    //note_detail_fenlei.setText(fenlei);
+                    //note_detail_icon.setImageResource(fenbie_icon_list[fenlei_id]);
+
+                    note_detail_number.setVisibility(View.VISIBLE);
+                    note_detail_title.setVisibility(View.VISIBLE);
+                    //note_detail_fenlei.setVisibility(View.VISIBLE);
+                    //note_detail_icon.setVisibility(View.VISIBLE);
+                }
             } while (cursor.moveToNext());
         }
         cursor.close();
+
         //创建一个simpleAdapter
         SimpleAdapter myAdapter = new SimpleAdapter(getApplicationContext(), listitem, R.layout.main_list_item, new String[]{"icon","title", "date","number"}, new int[]{R.id.imageView_note_icon,R.id.textView_title, R.id.textView_date,R.id.textView_number});
         ListView main_listView = (ListView) findViewById(R.id.main_note_list);
@@ -200,17 +220,22 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_note) {
-            // Handle the camera action
-        } else if (id == R.id.nav_setting) {
 
         } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            Intent shareIntent = new Intent();
+            //shareIntent.setAction(Intent.ACTION_SEND);
+            //shareIntent.putExtra(Intent.EXTRA_TEXT, "This is my Share text.");
+            shareIntent.setType("text/plain");
+            //shareIntent.setType("image/*");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Share");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "Lifenote,记录点滴生活！");
+            //设置分享列表的标题，并且每次都显示分享列表
+            startActivity(Intent.createChooser(shareIntent, "分享到"));
+        } else if (id == R.id.nav_aboutus) {
+            new AlertDialog.Builder(MainActivity.this).setTitle("关于：")
+                    .setMessage("作者：zyc，邮箱：3214466168@qq.com，微博：卖柴火的小晨子").setPositiveButton("确定", null)
+                    .show();
         }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
     public static int getGapCount(Date startDate, Date endDate) {

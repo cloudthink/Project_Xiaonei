@@ -14,9 +14,10 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:id="@+id/relativeLayout2"
-        android:background="@mipmap/top_bg_1">
+        android:background="@mipmap/top_bg_1"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:layout_width="wrap_content"
@@ -24,9 +25,56 @@
             android:text="昨天只是今天的回忆，明天只是今天的梦。"
             android:id="@+id/textView2"
             android:textSize="18dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"
-            android:layout_margin="8dp" />
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:textColor="#ffffff"
+            android:layout_above="@+id/linearLayout2"
+            android:layout_centerHorizontal="true" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:weightSum="1"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/linearLayout2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="0"
+                android:textColor="#ffffff"
+                android:id="@+id/textView_main_number"
+                android:layout_below="@+id/textView_main_title"
+                android:layout_centerHorizontal="true"
+                android:textSize="90dp"
+                android:textIsSelectable="true"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="今天心情好！"
+                android:textColor="#ffffff"
+                android:id="@+id/textView_main_title"
+                android:textSize="23dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/relativeLayout2"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="0.16" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:id="@+id/imageView_main_icon"
+                android:layout_above="@+id/textView_main_title"
+                android:layout_alignParentEnd="true"
+                android:src="@mipmap/ic_favorite_border"
+                android:layout_weight="0.16" />
+
+        </LinearLayout>
+
     </RelativeLayout>
 
 

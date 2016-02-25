@@ -82,22 +82,22 @@ public class NoteDetailActivity extends AppCompatActivity {
         TextView note_detail_number = (TextView) findViewById(R.id.textView_note_detail_number);
         TextView note_detail_title = (TextView) findViewById(R.id.textView_note_detail_title);
         TextView note_detail_fenlei = (TextView) findViewById(R.id.textView_note_detail_fenlei);
-        ImageView note_detail_icon = (ImageView) findViewById(R.id.imageView_icon);
+        //ImageView note_detail_icon = (ImageView) findViewById(R.id.imageView_icon);
 
         note_detail_number.setText(cha);
         note_detail_title.setText(title);
         note_detail_fenlei.setText(fenlei);
-        note_detail_icon.setImageResource(fenbie_icon_list[fenlei_id]);
+        //note_detail_icon.setImageResource(fenbie_icon_list[fenlei_id]);
 
         note_detail_number.setVisibility(View.VISIBLE);
         note_detail_title.setVisibility(View.VISIBLE);
         note_detail_fenlei.setVisibility(View.VISIBLE);
-        note_detail_icon.setVisibility(View.VISIBLE);
+        //note_detail_icon.setVisibility(View.VISIBLE);
         //编辑，分享，返回点击监听
         ImageView image_share = (ImageView) findViewById(R.id.imageView_share);
         ImageView image_redit = (ImageView) findViewById(R.id.imageView_redit);
         ImageView image_back = (ImageView) findViewById(R.id.imageView_back);
-        ImageView image_delete = (ImageView) findViewById(R.id.imageView_delete);
+        //ImageView image_delete = (ImageView) findViewById(R.id.imageView_delete);
         image_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +120,7 @@ public class NoteDetailActivity extends AppCompatActivity {
                 NoteDetailActivity.this.finish();
             }
         });
+        /*
         image_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,6 +128,7 @@ public class NoteDetailActivity extends AppCompatActivity {
                 mydialog(finalNoteid);
             }
         });
+        */
     }
     public void mydialog(final int finalNoteid){
         new AlertDialog.Builder(NoteDetailActivity.this).setTitle("确认删除？?")
@@ -160,7 +162,7 @@ public class NoteDetailActivity extends AppCompatActivity {
         mydbcontent = new StringBuilder();
         String note_id_string = String.valueOf(finalNoteid);//int转String
 
-        mydb.delete("note","noteid = ?",new String[]{note_id_string});
+        mydb.delete("note", "noteid = ?", new String[]{note_id_string});
 
         Toast.makeText(mContext, "删除成功！", Toast.LENGTH_SHORT).show();
 
@@ -170,12 +172,15 @@ public class NoteDetailActivity extends AppCompatActivity {
 
         NoteDetailActivity.this.finish();
     }
+
     public void myShare(){
         Intent shareIntent = new Intent();
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "This is my Share text.");
-        shareIntent.setType("text/plain");
-
+        //shareIntent.setAction(Intent.ACTION_SEND);
+        //shareIntent.putExtra(Intent.EXTRA_TEXT, "This is my Share text.");
+       // shareIntent.setType("text/plain");
+        shareIntent.setType("image/*");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Share");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "Lifenote,记录点滴生活！");
         //设置分享列表的标题，并且每次都显示分享列表
         startActivity(Intent.createChooser(shareIntent, "分享到"));
     }
