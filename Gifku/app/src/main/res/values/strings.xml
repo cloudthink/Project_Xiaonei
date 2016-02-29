@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Gifku</string>
+    //自定义
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="tab_menu_alert">日报</string>
+    <string name="tab_menu_profile">斗图</string>
+    <string name="tab_menu_pay">仓库</string>
+    <string name="tab_menu_setting">我</string>
+</resources>
